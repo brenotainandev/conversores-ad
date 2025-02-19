@@ -35,7 +35,14 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(conversores-ad conversores-ad.c )
+add_executable(conversores-ad
+        conversores-ad.c
+        src/adc.c
+        src/display.c
+        src/entradas.c
+        src/leds.c
+        src/pwm.c
+        src/ssd1306.c)
 
 pico_set_program_name(conversores-ad "conversores-ad")
 pico_set_program_version(conversores-ad "0.1")
@@ -46,7 +53,11 @@ pico_enable_stdio_usb(conversores-ad 1)
 
 # Add the standard library to the build
 target_link_libraries(conversores-ad
-        pico_stdlib)
+        pico_stdlib
+        hardware_adc
+        pico_stdlib
+        hardware_i2c
+        hardware_pwm)
 
 # Add the standard include files to the build
 target_include_directories(conversores-ad PRIVATE
